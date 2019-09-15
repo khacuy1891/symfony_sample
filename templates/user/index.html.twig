@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+    <a href="{{ path('user_add') }}" class="btn btn-default">
+        {{ 'Add more user' }}
+    </a>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">{{ 'Id' }}</th>
+                <th scope="col">{{ 'Full Name' }}</th>
+                <th scope="col">{{ 'UserName' }}</th>
+                <th scope="col">{{ 'Email' }}</th>
+                <th scope="col">{{ 'Actions' }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td><a href="{{ path('user_info', {id: user.id}) }}"> {{ user.fullName }}</a></td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td class="text-center">
+                    <div class="item-actions">
+                        <a href="{{ path('user_edit', {id: user.id}) }}" class="btn btn-sm btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'edit' }}
+                        </a>
+
+                        <a href="{{ path('user_delete', {id: user.id}) }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-edit" aria-hidden="true"></i> {{ 'delete' }}
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" align="center"></td>
+           </tr>
+           {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

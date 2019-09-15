@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    {% if user %}
+    <p>{{ user.getAvatar }}</p>
+    <form method="POST" action="{{ path('user_update', {id: user.id}) }}">
+        <img src="{{ asset(user.getAvatar) }}" alt="Italian Trulli" width="128" height="128">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Full Name</label>
+            <input type="text" class="form-control" id="full_name" name="full_name" aria-describedby="emailHelp" value="{{ user.getFullName }}" placeholder="Enter full name">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">UserName</label>
+            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" value="{{ user.getUserName }}" placeholder="Enter Username">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" value="{{ user.getEmail }}" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="password" name="password" value="{{ user.getPassword }}" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ path('user') }}" class="btn btn-default">
+            <i class="fa fa-list-alt" aria-hidden="true"></i> {{ 'Cancel' }}
+        </a>
+    </form>
+    {% endif %}
+
+</div>
+{% endblock %}
